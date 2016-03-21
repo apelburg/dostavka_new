@@ -1,0 +1,129 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{
+   margin:0px;
+   font-family:Verdana, Arial, Helvetica, sans-serif;
+   font-size:12px;
+}
+div{
+   font-family:Verdana, Arial, Helvetica, sans-serif;
+   font-size:11px;
+}
+a{
+   font-family:Verdana, Arial, Helvetica, sans-serif;
+   font-size:11px;
+}
+p{
+   font-family: Arial, Verdana, Helvetica, sans-serif;
+   font-size:12px;
+   padding:0px 4px 0px 4px;;
+}
+table{ 
+   border-collapse:collapse;  
+}
+
+table td{ 
+   border:#BBBBBB solid 1px;
+   border-collapse:collapse;
+}
+
+.table_without_border td{ 
+   border:none;
+}
+
+textarea{ 
+   font-family:Verdana, Arial, Helvetica, sans-serif;
+   font-size:11px;
+   border:none;
+   margin:0px;
+   height:40px;
+   padding:4px 4px 4px 4px;
+}
+input{
+  font-size:11px;
+  padding:1px;
+  /* margin:4px 0px 4px 0px;*/
+}
+
+.page_top{
+  height:40px;
+  border:none;
+  background:url(img/top.gif) repeat-x; 
+}
+.page_top td{
+   border:none;
+}
+.table_top{
+  background-color:#EEEEEE;
+}
+
+.table_top p{
+   font-family:Verdana, Arial, Helvetica, sans-serif;
+   font-size:11px;
+   padding:0px 4px 0px 4px;;
+}
+.notice_details{ 
+   height:20px;
+   padding:4px 4px 4px 4px;
+   background-color:#DDDDDD;
+}
+.notice_details_content{ 
+   padding:4px 4px 4px 4px;
+   background-color:#FFFFFF;
+}
+.notice_details_button_close{ 
+   position:absolute;
+   top:0px;
+   right:0px;
+   padding:0px 2px 0px 2px;
+   background-color:#FFFFFF;
+}
+.notice_details_button_close a{ 
+   text-decoration:none;
+ 
+}
+.companies_list{ 
+   position:absolute;
+   width:300px;
+   height:156px;
+   border: #CCCCCC solid 1px;
+   background-color:#FFFFFF;
+   overflow:auto;
+   display:none;
+}
+.show_companies_list{ 
+   border: #CCCCCC solid 0px;
+   cursor:pointer;
+   padding:1px 4px 0px 4px;
+}
+.calendar{
+    font-size:11px;
+}
+.day_switch_by_order_button{
+   padding:0px;
+   width:18px;
+   height:18px;
+   font-size:9px;
+   text-align:center;
+   vertical-align:middle;
+}
+table tr .dragRow{background:#707F8C; color:#191970; border:2px solid #FFD700; }
+table tr .color{background:#FCFAFC; border:0px solid #FFD700	}
+#result_search_tbl{
+  width: 80%;
+  margin: 0 auto;
+}
+#result_search_tbl tr td{
+  padding: 5px;
+  font-size: 14px;
+}
+#result_search_tbl tr td:nth-of-type(1),#result_search_tbl tr td:nth-of-type(2){
+  text-align: center;
+}
+#result_search_tbl th{
+   background-color: #eee;
+   padding:10px 5px;
+   border: #BBBBBB solid 1px;
+    border-collapse: collapse;
+}
