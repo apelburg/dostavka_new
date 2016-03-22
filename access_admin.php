@@ -1,4 +1,23 @@
 <?php
+
+include_once('../config.php');
+include_once('../libs/mysqli.php');
+function get_manager_name(){
+  global $mysqli;
+  // MANAGERS_TBL
+  $query = "SELECT * FROM `". MANAGERS_TBL ."`";
+  $result = $mysqli->query($query) or die($mysqli->error);
+  if($result->num_rows > 0){
+    while($row = $result->fetch_assoc()){
+      $name[$row['id']] = $row['name'].' '.$row['last_name'];
+    }
+  }
+  return $name;
+}
+
+$MANAGERS = get_manager_name();
+
+
 if(mysql_num_rows($result) > 0){
 	    while($item = mysql_fetch_assoc($result)){
 		   $status = ($item['status'] == 'on')? 'checked' : '' ;
@@ -10,10 +29,15 @@ if(mysql_num_rows($result) > 0){
 		   }
 		   
 			//строка
-			$content.=  '<tr id="tr_for_id_'.$item['id'].'" rel="'.$item['id'].'">';
+			$content.=  '<tr id="tr_for_id_'.$item['id'].'" '.(($item['disable_editing'] > 0)?'class="deleted_row nodrag nodrop" title="'.$MANAGERS[$item['disable_editing']].'"':'').' rel="'.$item['id'].'">';
 	       
 			//_1_колонка
-			$content.=  '<td id="data_td_1_'.$item['id'].'" height="50" rel="sort_order" align="center" ><p><span>'.++$count.' </span></p></td>';
+			if($item['disable_editing'] > 0){
+				$content.=  '<td id="data_td_1_'.$item['id'].'" height="50" align="center" ><p><span> - </span></p></td>';
+			}else{
+				$content.=  '<td id="data_td_1_'.$item['id'].'" height="50" rel="sort_order" align="center" ><p><span>'.++$count.' </span></p></td>';	
+			}
+			
 		   
 			//_2_колонка
 			$content.= '<td id="data_td_3_'.$item['id'].'" height="50" width="25" ><p align="center"><input type="text" style="width:60px; display:none" class="datepicker" name="'.$item['id'].'" data-date="'.substr($_GET['date'], 0, 8).'" ></p></td>';
@@ -70,7 +94,8 @@ if(mysql_num_rows($result) > 0){
 									$create_time = ((isset($value['create_time']) && $value['create_time'] != '0000-00-00 00:00:00')?'<br>'.date('d.m.Y H:i',strtotime($value['create_time'])):"");
 									$content .='<div class="cell" style="vertical-align:top;width:90px;"><div style="float:left;width:100px;">'.$value['name'].' '.mb_substr($value['last_name'], 0, 2).'.'.$create_time.'</div></div>';
 									//колонка _5_
-									$content .='<div class="cell" onClick="cleanThisePosition(this)" style="vertical-align:top; cursor:pointer; padding:5px;"><div class="BtnAddOrDel" style="padding: 0 5px 0 5px;"><img src="img/del2.png" style="margin:0px 5px 0 0; "></div></div>
+
+									$content .='<div class="cell" '.(($item['disable_editing'] == 0)?'onClick="cleanThisePosition(this)"':'').' style="vertical-align:top; cursor:pointer; padding:5px;"><div class="BtnAddOrDel" style="padding: 0 5px 0 5px;"><img src="img/del2.png" style="margin:0px 5px 0 0; "></div></div>
 									</div>';								
 									}else{
 										
@@ -185,7 +210,7 @@ if(mysql_num_rows($result) > 0){
             <td  width="90" align="center"><a href="#" onMouseOver="this.parentNode.style.backgroundColor = '#D5D5D5';" onMouseOut="this.parentNode.style.backgroundColor = null;" style="display:block; height:23px;padding-top:8px;">сохранить</a></td>
             <td  width="20" align="center">&nbsp;</td>
             <td  width="100" align="center"><a href="/dostavka_new/dostavka_podrobno.php?for_print&date=<?php  echo $_GET['date'] ?>" target="_blank" onMouseOver="this.parentNode.style.backgroundColor = '#D5D5D5';" onMouseOut="this.parentNode.style.backgroundColor = null;" style="display:block; height:23px;padding-top:8px;">распечатать</a></td>
-            <td  width="20" align="center">&nbsp;</td>
+            <td  width="20" align="center" id="deleted_show">показать<br>удалённые</td>
             <td width="510" align="center">
               <form method="POST" action="http://<?php echo $_SERVER['HTTP_HOST']; ?>/dostavka_new/">  
                 <input type="text" name="search_company" placeholder="по компании">

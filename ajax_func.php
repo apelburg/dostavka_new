@@ -243,6 +243,32 @@ INSERT INTO `".DOSTAVKA_BIG_ROW_TBL."` (`id`, `num_rows`, `status`, `date`, `par
 	}
 	//////////next
 	if($_POST['name']=='del_big_row'){
+		
+		$id =  trim($_POST['id_kurier']);	
+		$checkbox = $_POST['checkbox'];
+		// if($checkbox>0){
+		// 	$query = "DELETE FROM `".DOSTAVKA_SMALL_ROW_TBL."` WHERE `".DOSTAVKA_SMALL_ROW_TBL."`.`id_parent` = $id";
+		// 	$result = mysql_query($query,$db);
+		// }
+		// if(!isset($_SESSION)){
+			@session_start();
+		// }
+		// 	echo '<pre>';
+		// print_r($_SESSION);
+		// echo '<pre>';
+		$query = "UPDATE `".DOSTAVKA_BIG_ROW_TBL."` SET `disable_editing` = '".$_SESSION['access']['user_id']."' WHERE `id` = '".$id."'";
+		
+		// echo $query;
+		// $query = "DELETE FROM `".DOSTAVKA_BIG_ROW_TBL."` WHERE `id` = $id";
+		$result = mysql_query($query,$db);
+		// $result = mysql_query($query,$db);
+		if(!$result)exit(mysql_error());	
+		echo "OK";	
+		
+	}
+	//////////next
+	if($_POST['name']=='del_big_row_real'){
+		
 		$id =  trim($_POST['id_kurier']);	
 		$checkbox = $_POST['checkbox'];
 		if($checkbox>0){
@@ -251,7 +277,7 @@ INSERT INTO `".DOSTAVKA_BIG_ROW_TBL."` (`id`, `num_rows`, `status`, `date`, `par
 		}
 		$query = "DELETE FROM `".DOSTAVKA_BIG_ROW_TBL."` WHERE `id` = $id";
 		$result = mysql_query($query,$db);
-		$result = mysql_query($query,$db);
+		// $result = mysql_query($query,$db);
 		if(!$result)exit(mysql_error());	
 		echo "OK";	
 		

@@ -51,9 +51,9 @@ if($_SESSION['access']['user_id'] == 42){
     $calendar = "";
     $content = "";
    if(!isset($_POST['search'])){
-   // закладки по дням недели
-   $work_week = 5;
-   $content = '<table width="1000" border="1" cellpadding="0" cellspacing="0" align="left"><tr><td width="23">
+     // закладки по дням недели
+     $work_week = 5;
+      $content = '<table width="1000" border="1" cellpadding="0" cellspacing="0" align="left"><tr><td width="23">
            <button onclick="location = \'?day='.date('d.m.y',mktime(0,0,0,$month,($day - 7),$year)).'\';" class="day_switch_by_order_button"><<</button>
 		   <br>
 		   <button onclick="location = \'?day='.date('d.m.y',mktime(0,0,0,$month,($day + 7),$year)).'\';" class="day_switch_by_order_button">>></button>
@@ -89,7 +89,7 @@ if($_SESSION['access']['user_id'] == 42){
 	    //  $date = date('d.m.y',mktime(0,0,0,date('m'),date('d') -(($karta->cur_week_day - 1) - $i),date('Y')));
 	    //// $date = date('d.m.y',mktime() - (($karta->cur_week_day - 1) - $i)*86400);
 	  // }
-	   $query = "SELECT*FROM `".DOSTAVKA_BIG_ROW_TBL."` WHERE `date` = '".$date."'";
+	   $query = "SELECT*FROM `".DOSTAVKA_BIG_ROW_TBL."` WHERE `date` = '".$date."' AND `disable_editing` = '0'";
 	   $result = mysql_query($query,$db);
 	   $content.=  '<td valign="top" height="72"><table width="100%"  border="1" cellpadding="0" cellspacing="0" bgcolor="#EEEEEE">';
 	   if(mysql_num_rows($result) > 0){
@@ -315,7 +315,7 @@ function get_manager_name(){
                 
             </td>
 	    <td width="100" align="center"> 
-               <a href="../admin/order_manager/?page=clients&show_clients=all"  onMouseOver="this.parentNode.style.backgroundColor = '#D5D5D5';" onMouseOut="this.parentNode.style.backgroundColor = null;" style="display:block; height:23px;padding-top:8px;">онлайн сервис</a>
+               <a href="../os/?page=cabinet&section=requests&subsection=no_worcked_men"  onMouseOver="this.parentNode.style.backgroundColor = '#D5D5D5';" onMouseOut="this.parentNode.style.backgroundColor = null;" style="display:block; height:23px;padding-top:8px;">онлайн сервис</a>
             </td>
             <td  width="20" align="center">&nbsp; 
                 

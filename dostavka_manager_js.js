@@ -372,40 +372,70 @@ function checkAllRow(i){
 			});	
 	}
 }
-//сортировка строк
-function resortBigRow(){
-	$('#myTable').find('.datepicker').each(function(index, element) {
-	//alert($(this).parent().prev().prev().prev().html())
-	$(this).parent().parent().prev().html('<p><span>'+(Number(index)+1)+'</span></p>');//пересчет строк
-	});
-}
+
+// //удаление поездки (big_row) 
+// function delBigRow(i){
+// 		if(confirm('Подтвердите удаление поездки')){
+// 			$(i).attr('id','deleteRow');
+// 			var id_kurier = $(i).attr('name');
+// 			if($(i).parent().parent().find('#added_small_row_new').length>0){
+// 			var check = $(i).parent().parent().find('.table .statusTask').length-$(i).parent().parent().find('#added_small_row_new').length;
+// 			}else{
+// 			var check = $(i).parent().parent().find('.table .statusTask').length;
+// 			}
+// 			//alert(check);
+// 			//return;
+// 			$.post("ajax_func.php",
+// 				{ 
+// 				name: 'del_big_row',
+// 				id_kurier: id_kurier,
+// 				checkbox: check
+// 				},
+// 				function(data){
+// 					if(data!='OK'){
+// 						alert('Ошибка #00005: \n'+data+'\n\nпожалуйста скопируйте данное сообщение \nи отправьте администратору.');return;}
+// 					$('#tr_for_id_'+id_kurier).fadeOut("fast",function(){
+// 						$('#tr_for_id_'+id_kurier).remove();
+// 						resortBigRow();						
+// 					});		
+								
+// 				});	
+				
+// 	}
+// };
 //удаление поездки (big_row) 
 function delBigRow(i){
-		if(confirm('Подтвердите удаление поездки')){
-			$(i).attr('id','deleteRow');
-			var id_kurier = $(i).attr('name');
-			if($(i).parent().parent().find('#added_small_row_new').length>0){
-			var check = $(i).parent().parent().find('.table .statusTask').length-$(i).parent().parent().find('#added_small_row_new').length;
-			}else{
-			var check = $(i).parent().parent().find('.table .statusTask').length;
-			}
-			//alert(check);
-			//return;
-			$.post("ajax_func.php",
-				{ 
+	if(confirm('Подтвердите удаление поездки')){
+		if($(i).parent().parent().hasClass('deleted_row')){
+			alert($(i).parent().parent().attr('title')+ ' уже удалил эту поездку');
+			return true;
+		}
+
+		$(i).attr('id','deleteRow');
+		var id_kurier = $(i).attr('name');
+		if($(i).parent().parent().find('#added_small_row_new').length>0){
+		var check = $(i).parent().parent().find('.table .statusTask').length-$(i).parent().parent().find('#added_small_row_new').length;
+		}else{
+		var check = $(i).parent().parent().find('.table .statusTask').length;
+		}
+		//alert(check);
+		//return;
+		$.post("ajax_func.php",{ 
 				name: 'del_big_row',
 				id_kurier: id_kurier,
 				checkbox: check
-				},
-				function(data){
-					if(data!='OK'){
-						alert('Ошибка #00005: \n'+data+'\n\nпожалуйста скопируйте данное сообщение \nи отправьте администратору.');return;}
-					$('#tr_for_id_'+id_kurier).fadeOut("fast",function(){
-						$('#tr_for_id_'+id_kurier).remove();
-						resortBigRow();						
-					});		
-								
-				});	
+			},
+			function(data){
+				if(data!='OK'){
+					alert('Ошибка #00005: \n'+data+'\n\nпожалуйста скопируйте данное сообщение \nи отправьте администратору.');
+					return;
+				}			
+
+				$('#tr_for_id_'+id_kurier).fadeOut("fast",function(){
+					$('#tr_for_id_'+id_kurier).addClass('nodrop nodrag delete_row').find('td[rel="sort_order"]').removeAttr('rel');
+					resortBigRow();						
+				});									
+			});	
 				
 	}
 };

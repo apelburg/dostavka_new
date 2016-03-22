@@ -165,3 +165,21 @@ box-shadow:         7px 7px 5px 0px rgba(0, 0, 0, 0.41);}
 .green_class.red_class,.red_class{
 	background-color: rgb(255, 118, 118);
 }
+.deleted_row.nodrag.nodrop td{
+  display: none; 
+}
+.deleted_row.nodrag.nodrop td,
+.deleted_row.nodrag.nodrop td div{
+  background:#EFE2E2;
+}
+#deleted_show{
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 10px;
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}
+#deleted_show.checked{
+  background-color: rgb(213, 213, 213);
+}
