@@ -9,15 +9,15 @@ $(document).ready(function() {
             data.key = $(table).find("tbody tr td").attr("rel");
             $(row).fadeOut("fast").fadeIn("slow");      
             
-    //         $(table).find("tbody tr").each(function(i, e){
-    //             var id = $(e).find("td:first").attr("id");
-    //             var order = i -2;
-    //             data.data[order] = id;
-    //             $(e).find("td[rel=sort_order]").html(order);
-				// //alert(data.key);
-    //         });
             // ресорт
             resortBigRow();
+            $(table).find("tbody tr").each(function(i, e){
+                var id = $(e).find("td:first").attr("id");
+                var order = i -2;
+                data.data[order] = id;
+                // $(e).find("td[rel=sort_order]").html(order);
+				//alert(data.key);
+            });
             $.ajax({
                 type: "POST",
                 url: "update_num_rows.php",

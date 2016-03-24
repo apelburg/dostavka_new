@@ -90,7 +90,9 @@ if($_SESSION['access']['user_id'] == 42){
 	    //// $date = date('d.m.y',mktime() - (($karta->cur_week_day - 1) - $i)*86400);
 	  // }
 	   $query = "SELECT*FROM `".DOSTAVKA_BIG_ROW_TBL."` WHERE `date` = '".$date."' AND `disable_editing` = '0'";
-	   $result = mysql_query($query,$db);
+	   echo $query;
+     
+     $result = mysql_query($query,$db);
 	   $content.=  '<td valign="top" height="72"><table width="100%"  border="1" cellpadding="0" cellspacing="0" bgcolor="#EEEEEE">';
 	   if(mysql_num_rows($result) > 0){
 

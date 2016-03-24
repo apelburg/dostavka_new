@@ -34,7 +34,8 @@ header('Content-Type: text/html; charset=utf-8');
 	
 	if(isset($_GET['for_print'])){
 	
-	    $query = "SELECT*FROM `karta_kurijera` WHERE `date` = '".$date."' ORDER BY `num_rows`";
+	    // $query = "SELECT*FROM `karta_kurijera` WHERE `date` = '".$date."' ORDER BY `num_rows`";
+	    $query = "SELECT*FROM `karta_kurijera` WHERE `date` = '".$date."' AND `disable_editing` = '0' ORDER BY `num_rows`";
 	    $result = mysql_query($query,$db);
 	    if(mysql_num_rows($result) > 0){
 		    echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
